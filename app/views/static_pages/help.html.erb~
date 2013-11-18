@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GameBook | <%= yield(:title) %></title>
+  </head>
+  <body>
+    <h1>Help</h1>
+    <p>
+      GameBook Help Page
+    </p>
+  </body>
+</html>
