@@ -1,0 +1,10 @@
+<% provide(:title, 'Pending Friend Requests') %>
+<h1>Pending Friend Requests</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @user %>
+</ul>
+
+<%= will_paginate %>

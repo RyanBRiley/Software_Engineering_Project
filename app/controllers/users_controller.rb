@@ -44,6 +44,14 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def pending_friends
+   #@user = PendingFriendRequest.select(:receiver).where(:requester => current_user)
+  end
+
+  #def send_friend_request
+  #redirect_to @user
+  #end
+
   private
 
     def user_params

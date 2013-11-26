@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121053812) do
+ActiveRecord::Schema.define(version: 20131126110913) do
+
+  create_table "pending_friend_requests", force: true do |t|
+    t.integer  "requester"
+    t.integer  "receiver"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", force: true do |t|
     t.string   "content"

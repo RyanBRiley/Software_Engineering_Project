@@ -11,6 +11,8 @@ validates :name,  presence: true, length: { maximum: 50 }
 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 has_many :posts
+has_many :sent_friend_requests, :class_name => 'PendingFriendRequest', :foreign_key => 'sender_id', dependent: :destroy
+has_many :received_friend_requests, :class_name => 'PendingFriendRequest', :foreign_key => 'receiver_id', dependent: :destroy
 has_secure_password
 validates :password, length: { minimum: 6 }
 def User.new_remember_token
