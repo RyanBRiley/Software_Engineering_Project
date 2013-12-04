@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.paginate(page: params[:page])
+    @posts = @user.posts.joins(:poster).paginate(page: params[:page])
     @post_context = "Post to #{@user.name}'s feed"
     @post = @user.posts.build 
     @post_owner_id = @user.id

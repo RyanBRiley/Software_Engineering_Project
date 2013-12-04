@@ -1,6 +1,7 @@
 <%= form_for(@post) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
+     <%= f.hidden_field :poster_id, :value => current_user.id %>
     <%= f.hidden_field :post_owner, :value => @post_owner_id %>
     <%= f.text_area :content, placeholder: @post_context %>
   </div>

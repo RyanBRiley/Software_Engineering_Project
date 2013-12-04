@@ -1,7 +1,7 @@
 <%= form_for(@post) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.hidden_field :post_owner, :value => params[:id] %>
+    <%= f.hidden_field :post_owner, :value => @post_owner_id %>
     <%= f.text_area :content, placeholder: @post_context %>
   </div>
   <%= f.submit "Submit Post", class: "btn btn-large btn-primary" %>
