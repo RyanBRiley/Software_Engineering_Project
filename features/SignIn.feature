@@ -5,7 +5,7 @@ Scenario: User Sign in
 	And I am on the GameBook homepage
 	When I follow "Sign in"
 	And I fill in the following:
-	|Email|test@test.com|
-    |Password|testpass|
+	|Email|testcuke@test.com|
+    |Password|testcukepass|
 	And I press "Sign in"
 	Then I should be on my user page
