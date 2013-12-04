@@ -5,10 +5,11 @@ Scenario: Edit Profile
 	When I follow "Account"
 	And I follow "Settings"
 	Then I should be on the Update your profile page
-	When I fill in "Gamertag" with "testchange"
-	And I fill in "Password" with "test3pass"
-	And I fill in "Confirm password" with "test3pass"
+	When I fill in "GamerTag" with "testchange"
+	And I fill in "Password" with "testpass"
+	And I fill in "Confirm Password" with "testpass"
 	And I press "Save changes"
 	Then I should be on my user page
+	And I should see "testchange"
 	
 

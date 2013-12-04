@@ -23,6 +23,8 @@ module NavigationHelpers
 	  '/users/1'
 	when /^the Sign in page/
 	  '/signin'
+	when /^the Update your profile page/
+	  '/users/1/edit'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
