@@ -10,7 +10,7 @@ Given /^a valid user$/ do
 end
 
 Given /^a logged in user$/ do
-  Given "a valid user"
+  step "a valid user"
   visit signin_url
   fill_in "Email", :with => "test@test.com"
   fill_in "Password", :with => "testpass"
