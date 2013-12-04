@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121053812) do
+ActiveRecord::Schema.define(version: 20131203205343) do
+
+  create_table "friendship_messages", force: true do |t|
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friendship_relation_types", force: true do |t|
+    t.integer  "relation_id"
+    t.integer  "friendship_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.integer  "friendship_message_id"
+    t.datetime "requested_at"
+    t.datetime "accepted_at"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id"
+  add_index "friendships", ["status"], name: "index_friendships_on_status"
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id"
 
   create_table "posts", force: true do |t|
     t.string   "content"
@@ -19,6 +47,14 @@ ActiveRecord::Schema.define(version: 20131121053812) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "relation_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relation_types", ["name"], name: "index_relation_types_on_name"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -28,6 +64,7 @@ ActiveRecord::Schema.define(version: 20131121053812) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
+    t.integer  "friends_count",   default: 0,     null: false
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"

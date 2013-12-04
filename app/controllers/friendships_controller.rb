@@ -1,0 +1,52 @@
+class FriendshipsController < ApplicationController
+#before_action :signed_in_user
+
+  def index
+  redirect_to users_path
+  end
+
+  def create
+  @newfriend = User.find(params[:user])
+  friendship, status = current_user.be_friends_with(@newfriend)
+  
+  if status == Friendship::STATUS_REQUESTED
+  # the friendship has been requested
+  #Mailer.deliver_friendship_request(friendship)
+  flash[:success] = "Friend Request Sent"
+  elsif status == Friendship::STATUS_ALREADY_FRIENDS
+  flash[:success] = "ALREADY FRIENDS"
+  elsif status == Friendship::STATUS_IS_YOU
+  flash[:success] = "IS YOU"
+  elsif status == Friendship::STATUS_FRIEND_IS_REQUIRED
+  flash[:success] = "FRIEND REQUIRED FOR REQUEST"
+  elsif status == Friendship::STATUS_ALREADY_REQUESTED
+  flash[:success] = "ALREADY REQUESTED"
+  elsif status == Friendship::STATUS_FRIENDSHIP_ACCEPTED
+  flash[:success] = "FRIEND REQUEST ACCEPTED"
+  else
+  flash[:success] = "SOMETHING WENT WRONG, #{status}"
+  end
+  #@received_friend_request = params[:receiver].to_i.received_friend_requests.build(:requestor => "#{current_user}")
+  #flash[:success] = "Friend request sent!"
+  redirect_to(:back)
+#redirect_to :controller => :received_friend_requests, :action => "create"
+#redirect_to :controller => received_friend_requests(:requester => current_user, :receiver => params[:receiver]), action => :create
+  end
+
+
+
+  def destroy
+  @killfriend = User.find(params[:id])
+  current_user.remove_friendship_with(@killfriend)
+  #Friendship.find(@frienship.id).destroy
+  flash[:success] = @killfriend
+  redirect_to(:back)
+  end
+end
+
+ #private
+
+    #def sent_friend_request_params
+     # params.require(:user, :receiver)
+    
+#end

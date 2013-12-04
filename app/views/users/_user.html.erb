@@ -1,8 +1,22 @@
 <li>
   <%= gravatar_for user %>
+  <% if current_user?(user) || current_user.friends?(user) %>
   <%= link_to user.name, user %>
+  <% else %>
+  <%= user.name %>
+  <% end %>
+  <% if !current_user?(user) && !current_user.friends?(user) && status_of(user, current_user) == "None"%>
+    | <%= link_to "send friend request", friendships_path(:user => user), method: :create %> 
+  <% end %>
+  <% if status_of(user, current_user) == "requested" %>
+    | <%= link_to "accept friend request", friendships_path(:user => user), method: :create %> 
+  <% end %>
+  <% if status_of(user, current_user) == "pending" %>
+    | friend request pending
+  <% end %>
   <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
 </li>
+

@@ -9,6 +9,7 @@ gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+gem 'has_friends-rails3', :require => 'has_friends'
 
 group :development do
   gem 'sqlite3', '1.3.8'
