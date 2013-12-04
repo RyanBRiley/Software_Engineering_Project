@@ -1,6 +1,6 @@
 Feature: A user can edit their profile
 
-Scenario: Edit Profile
+Scenario: Edit Profile Gamertag
 	Given a logged in user
 	When I follow "Account"
 	And I follow "Settings"
