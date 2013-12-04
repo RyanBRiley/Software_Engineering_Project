@@ -4,7 +4,8 @@
 # 4. to allow users to post to others wall
 # 5. to allow users to designate themselves as event attendees  
 
-class User < ActiveRecord::Base has_friends 
+class User < ActiveRecord::Base 
+has_friends 
 before_save { self.email = email.downcase }
 before_create :create_remember_token
 validates :name,  presence: true, length: { maximum: 50 }

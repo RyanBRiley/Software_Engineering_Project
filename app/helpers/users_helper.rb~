@@ -5,7 +5,12 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
   def status_of(current_user, user)
-    Friendship.select('status').where("friend_id = ? AND user_id = ?", user, current_user).take.status
+    @status = Friendship.select('status').where("friend_id = ? AND user_id = ?", user, current_user).take
+    if @status.nil?
+    "None"
+    else 
+	@status.status
+    end
   end
 end
 

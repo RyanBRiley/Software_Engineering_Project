@@ -9,6 +9,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
+    @post_context = "Post to #{@user.name}'s feed"
+    @post = @user.posts.build 
+    @post_owner_id = @user.id
   end
 
   def new
@@ -60,10 +64,6 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
 
-    def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
-
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
@@ -72,4 +72,5 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+   
 end

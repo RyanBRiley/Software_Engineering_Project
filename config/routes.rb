@@ -11,7 +11,7 @@ EngineeringProject::Application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/pending_friends', to: 'users#pending_friends', via: 'get'
   match '/friends',         to: 'users#friends',         via: 'get'
-  resources :posts
+  resources :posts, only: [:create, :destroy]
   
   resources :users
   resources :friendships, only: [:create, :destroy]
