@@ -1,5 +1,18 @@
 <li>
-  <span class="poster_id"><%= render post.poster %></span>
+  <span class="poster_id">
+<li>
+  <%= gravatar_for post.poster %>
+  <% if current_user?(post.poster) || current_user.friends?(post.poster) %>
+  <%= link_to post.poster.name, post.poster %>
+  <% else %>
+  <%= post.poster.name %>
+  <% end %>
+  <% if current_user?(post.poster) || current_user?(post.user) %>
+    | <%= link_to "delete post", post, method: :delete,
+                                  data: { confirm: "You mad bro?" } %>
+  <% end %>
+</li>
+</span>
   <span class="content"><%= post.content %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(post.created_at) %> ago.

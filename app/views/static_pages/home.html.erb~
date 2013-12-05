@@ -7,9 +7,17 @@
       <section>
         <%= render 'shared/post_form' %>
       </section>
+<% if @user.posts.any? %>
+      <h3>Feed (<%= @user.posts.count %>)</h3>
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
     </aside>
   </div>
-   <%= link_to current_user, signup_path, class: "btn btn-large btn-primary" %>
+
+  
 <% else %>
 <div class="center hero-unit">
   <h1>Welcome to GameBook</h1>

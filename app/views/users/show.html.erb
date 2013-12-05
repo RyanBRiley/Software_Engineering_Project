@@ -25,7 +25,6 @@
 <%= link_to 'Back', users_path %><br><br>
   <% if signed_in? && !current_user?(@user)%>
  <%= render 'shared/post_form' %>
-<% end %>
 <div class="span8">
     <% if @user.posts.any? %>
       <h3>Feed (<%= @user.posts.count %>)</h3>
@@ -34,6 +33,7 @@
       </ol>
       <%= will_paginate @posts %>
     <% end %>
+  <% end %>
   </div>
 </div>
 

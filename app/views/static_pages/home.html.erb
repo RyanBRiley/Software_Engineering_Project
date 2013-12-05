@@ -7,8 +7,16 @@
       <section>
         <%= render 'shared/post_form' %>
       </section>
+<% if current_user.posts.any? %>
+      <h3>Feed (<%= current_user.posts.count %>)</h3>
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
     </aside>
   </div>
+
   
 <% else %>
 <div class="center hero-unit">

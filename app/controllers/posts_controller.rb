@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     if @post.save
       #flash[:success] = "post created!"
       flash[:success] = "post sent"
-      redirect_to root_url
+      redirect_to(:back)
     else
       render 'static_pages/home'
     end
@@ -18,6 +18,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    Post.find(params[:id]).destroy
+    flash[:success] = "Post Removed"
+    redirect_to(:back)
   end
 
   private
