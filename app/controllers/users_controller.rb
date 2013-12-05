@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  autocomplete :user, :name
   before_action :signed_in_user, only: [:index, :edit, :update]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
@@ -8,7 +9,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]) if !params[:id].blank?
+    @user = User.find_by_name(params[:name]) if params[:id].blank?
     @posts = @user.posts.joins(:poster).paginate(page: params[:page])
     @post_context = "Post to #{@user.name}'s feed"
     @post = @user.posts.build 

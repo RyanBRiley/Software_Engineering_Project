@@ -12,6 +12,8 @@ EngineeringProject::Application.routes.draw do
   match '/pending_friends', to: 'users#pending_friends', via: 'get'
   match '/friends',         to: 'users#friends',         via: 'get'
   match '/find_new_friends',         to: 'users#find_new_friends',         via: 'get'
+  match '/find_new_friends',         to: 'users#show',         via: 'post'
+  get 'users/autocomplete_user_name'
   resources :posts, only: [:create, :destroy]
   
   resources :users

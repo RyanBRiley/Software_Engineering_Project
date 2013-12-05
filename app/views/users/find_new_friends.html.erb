@@ -1,6 +1,10 @@
 <% provide(:title, 'Search for Friends') %>
 <h1>Search for Friends</h1>
 
+<%= form_tag do %>
+  <%=text_field_tag 'name', 'Search by GamerTag', :autocomplete => users_autocomplete_user_name_path %>
+<% end %>
+
 <% if !@recommendations.blank? %>
 <h2>Gamers you may know</h2>
 <ul class="users">
