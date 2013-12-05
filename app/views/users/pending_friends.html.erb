@@ -3,7 +3,14 @@
 
 
 
+
+<% if !@users.blank? %>
 <ul class="users">
   <%= render @users %>
 </ul>
+<% else %> 
+
+<h2>You have no pending friend requests</h2><br><center>This is most likely because you are unpopular</center>
+<% end %>
+
 
