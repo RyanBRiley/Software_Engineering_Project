@@ -57,7 +57,20 @@ class UsersController < ApplicationController
   @users = current_user.friends
   end
 
-  private
+  def find_new_friends
+  @recommendations= []
+  current_user.friendships.each do |f| 
+     
+	User.find(f.friend_id).friendships.each {|ff| @recommendations << User.find(ff.friend_id)}
+	@recommendations = @recommendations.uniq
+	@recommendations.delete_if {|u| current_user.friends?(u) || current_user?(u)}
+      
+end
+#@users = @users.uniq 
+ #    end
+  #   end
+  end 
+
 
     def user_params
       params.require(:user).permit(:name, :email, :password,

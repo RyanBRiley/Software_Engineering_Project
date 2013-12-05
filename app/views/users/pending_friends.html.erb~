@@ -10,7 +10,7 @@
 </ul>
 <% else %> 
 
-<h2>You have no pending friend requests</h2><br>This is most likely because you are unpopular
+<h2>You have no pending friend requests</h2><br><center>This is most likely because you are unpopular</center>
 <% end %>
 
 
