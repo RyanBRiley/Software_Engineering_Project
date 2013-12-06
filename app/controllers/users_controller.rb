@@ -11,10 +11,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id]) if !params[:id].blank?
     @user = User.find_by_name(params[:name]) if params[:id].blank?
+    if @user.blank?
+       flash[:success] = "No Users named #{params[:name]}"
+       redirect_to(:back)
+    else
     @posts = @user.posts.joins(:poster).paginate(page: params[:page])
     @post_context = "Post to #{@user.name}'s feed"
     @post = @user.posts.build 
     @post_owner_id = @user.id
+    end
   end
 
   def new
