@@ -1,4 +1,6 @@
 EngineeringProject::Application.routes.draw do
+  resources :games
+
   get "users/new"
 
   root  'static_pages#home'
@@ -13,6 +15,7 @@ EngineeringProject::Application.routes.draw do
   match '/friends',         to: 'users#friends',         via: 'get'
   match '/find_new_friends',         to: 'users#find_new_friends',         via: 'get'
   match '/find_new_friends',         to: 'users#show',         via: 'post'
+  match '/delete_posts',         to: 'posts#destroy_posts',         via: 'post'
   get 'users/autocomplete_user_name'
   resources :posts, only: [:create, :destroy]
   

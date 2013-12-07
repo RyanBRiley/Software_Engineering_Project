@@ -20,8 +20,11 @@
   <%= @user.email %>
 </p>
 <% if current_user?(@user) %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Edit', edit_user_path(@user) %> |  
+  <%= link_to 'Delete all posts', delete_posts_path, method: :destroy,
+                                  data: { confirm: "Clear all posts?" } %> |
 <% end %>
+
 <%= link_to 'Back', users_path %><br><br>
   <% if signed_in? && !current_user?(@user) && current_user.friends?(@user)%>
  <%= render 'shared/post_form' %>

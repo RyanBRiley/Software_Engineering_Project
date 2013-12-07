@@ -18,8 +18,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.find(params[:id]).destroy
+    Post.find(params[:id]).destroy 
     flash[:success] = "Post Removed"
+    redirect_to(:back)
+  end
+
+ def destroy_posts
+    current_user.posts.destroy_all 
+
+    flash[:success] = "All Posts Removed"
     redirect_to(:back)
   end
 

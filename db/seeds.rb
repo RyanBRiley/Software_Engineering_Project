@@ -12,3 +12,9 @@ admin = User.create!(name: "Ryan Riley",
                          password: "test12",
                          password_confirmation: "test12",
                          admin: true)
+
+
+cod = Game.create!(game_name: "Call of Duty: Ghosts",
+                         game_id: 1,
+                         user_id: 1,
+                         info: "The new Call of Duty")

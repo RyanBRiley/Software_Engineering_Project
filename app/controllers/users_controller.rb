@@ -54,6 +54,12 @@ class UsersController < ApplicationController
     flash[:success] = "User account deleted."
     redirect_to users_url
   end
+
+  def delete_posts
+    flash[:success] = current_user.posts
+   # flash[:success] = "All Posts Deleted"
+    #redirect_to(current_user)
+  end
   
   def pending_friends
   @pfriend = Friendship.select('user_id').where("friend_id = ? AND status = ?", params[:current], "requested")
@@ -73,6 +79,7 @@ class UsersController < ApplicationController
 	@recommendations.delete_if {|u| current_user.friends?(u) || current_user?(u)}
       
 end
+ 
 #@users = @users.uniq 
  #    end
   #   end
