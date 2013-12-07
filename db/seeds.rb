@@ -7,9 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-
-
-cod = Game.create!(game_name: "Call of Duty: Ghosts",
+test = Event.create!(name: "TEST EVENT",
+                         event_date: 01/01/2014,
                          game_id: 1,
-                         user_id: 1,
-                         info: "The new Call of Duty")
+                         location: "undisclosed",
+                         info: "Call of Duty")

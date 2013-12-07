@@ -1,18 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Game:</strong>
-  <%= @game.game_id %>
-</p>
-
-<p>
-  <strong>Game name:</strong>
+  <h2>
   <%= @game.game_name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @game.user_id %>
+</h2>
 </p>
 
 <p>
@@ -20,5 +11,12 @@
   <%= @game.info %>
 </p>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
+<% if !@events.blank? %>
+<h2>Events for <%= @game.game_name %></h2>
+<ul class="events">
+  <%= render @events %>
+</ul>
+<% end %>
+
+
 <%= link_to 'Back', games_path %>

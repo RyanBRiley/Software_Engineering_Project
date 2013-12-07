@@ -1,4 +1,6 @@
 EngineeringProject::Application.routes.draw do
+  resources :events
+
   resources :games
 
   get "users/new"
