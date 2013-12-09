@@ -1,4 +1,6 @@
 EngineeringProject::Application.routes.draw do
+  resources :events
+
   resources :games
 
   get "users/new"
@@ -15,7 +17,9 @@ EngineeringProject::Application.routes.draw do
   match '/friends',         to: 'users#friends',         via: 'get'
   match '/find_new_friends',         to: 'users#find_new_friends',         via: 'get'
   match '/find_new_friends',         to: 'users#show',         via: 'post'
-  match '/delete_posts',         to: 'posts#destroy_posts',         via: 'get'
+  match '/delete_posts',         to: 'posts#destroy_posts',         via: 'post'
+  match '/attend',         to: 'users#attend',         via: 'post'
+  match '/unattend',         to: 'users#unattend',         via: 'post'
   get 'users/autocomplete_user_name'
   resources :posts, only: [:create, :destroy]
   

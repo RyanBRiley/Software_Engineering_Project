@@ -1,5 +1,30 @@
-<h1>New event</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', events_path %>
+<% provide(:title, 'Host an Event') %>
+<h1>Host an Event</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@event) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.hidden_field(:user_id, :value => current_user.id) %>
+
+      <%= f.label :name, "Event name" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :event_date %>
+      <%= f.date_select :event_date %>
+
+      <%= f.label :game_id %>
+      <%= f.collection_select :game_id, @games, :id, :game_name, include_blank: true %>
+
+      <%= f.label :location, "Location" %>
+      <%= f.text_field :location %>
+
+      <%= f.label :info, "Other information" %><br>
+      <%= f.text_field :info %>
+
+      <%= f.submit "Create Event", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

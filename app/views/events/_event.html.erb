@@ -1,4 +1,7 @@
 <li>
-  <%= link_to event.name, event %>
+  <%= link_to event.name, event %> | <%= event.event_date %> 
+<% if !@in_index.blank? %>
+| <%= event.game.game_name %>
+<% end %>
 </li>
 

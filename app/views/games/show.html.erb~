@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
-
+<% if current_user.follows?(@game) %>
+You are receiving updates for this game
+<%= button_to "Stop Updates", :controller => "users", :action => "unfollow", :id => @game.id %>
+<% end %>
 <p>
-  <h2>
+  <h1>
   <%= @game.game_name %>
-</h2>
+</h1>
 </p>
 
 <p>
@@ -11,6 +14,13 @@
   <%= @game.info %>
 </p>
 
+<p>
+<% if !current_user.follows?(@game) %>
+Receive event updates and other information for <%= @game.game_name %>: <%= button_to "Subscribe", :controller => "users", :action => "follow", :id => @game.id %> 
+
+<% end %>
+
+</p>
 <% if !@events.blank? %>
 <h2>Events for <%= @game.game_name %></h2>
 <ul class="events">

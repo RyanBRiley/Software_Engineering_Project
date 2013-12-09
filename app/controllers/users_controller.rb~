@@ -19,6 +19,9 @@ class UsersController < ApplicationController
     @post_context = "Post to #{@user.name}'s feed"
     @post = @user.posts.build 
     @post_owner_id = @user.id
+    @events = Event.all.delete_if {|e| !current_user.likes?(e)}
+    @followed_games = Game.all.delete_if {|g| !current_user.follows?(g)}
+    @followed_game_updates = Event.where("game_id = ?", @followed_games)
     end
   end
 
@@ -58,7 +61,7 @@ class UsersController < ApplicationController
   def delete_posts
     flash[:success] = current_user.posts
    # flash[:success] = "All Posts Deleted"
-    redirect_to(current_user)
+    #redirect_to(current_user)
   end
   
   def pending_friends
@@ -79,13 +82,30 @@ class UsersController < ApplicationController
 	@recommendations.delete_if {|u| current_user.friends?(u) || current_user?(u)}
       
 end
+end
+
  
 #@users = @users.uniq 
  #    end
   #   end
-  end 
 
+  def attend
+    current_user.like!(Event.find(params[:id]))
+    flash[:success] = "You are registered to attend this event"
+    redirect_to(:back)
+  end
 
+   def unattend
+    current_user.unlike!(Event.find(params[:id]))
+    flash[:success] = "You are no longer registered to attend this event"
+    redirect_to(:back)
+  end
+
+   def follow
+       current_user.follow!(Game.find(params[:id]))
+	flash[:success] = "You are now receiving updates for this game"
+    redirect_to(:back)
+   end
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)

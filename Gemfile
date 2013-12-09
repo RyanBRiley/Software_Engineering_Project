@@ -12,6 +12,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'has_friends-rails3', :require => 'has_friends'
 gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
+gem "socialization"
 
 group :development do
   gem 'sqlite3', '1.3.8'

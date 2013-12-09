@@ -1,9 +1,20 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_user.likes?(@event) %>
+You are registered to attend this event
+<%= button_to "Cancel Registration", :controller => "users", :action => "unattend", :id => @event.id %>
+<% end %>
+
 <p>
   <strong>Name:</strong>
   <%= @event.name %>
 </p>
+
+<p>
+  <strong>Host:</strong>
+  <%= link_to @host.name, @host %>
+</p>
+
 
 <p>
   <strong>Event date:</strong>
@@ -12,7 +23,8 @@
 
 <p>
   <strong>Game:</strong>
-  <%= @event.game_id %>
+  <%= link_to @game.game_name , @game %>
+
 </p>
 
 <p>
@@ -25,5 +37,25 @@
   <%= @event.info %>
 </p>
 
+
+<% if !current_user.likes?(@event) %>
+
+<%= button_to "Attend Event", :controller => "users", :action => "attend", :id => @event.id %> 
+<% end %>
+
+<% if current_user.id == @event.user_id %> 
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Delete event', @event, method: :delete,
+                                  data: { confirm: "Cancel and Delete this Event?" } %> 
+<% end %>
+| <%= link_to 'Back', events_path %>
+<% if !@users.blank? %>
+<h2>Gamers Attending this event:</h2>
+<ul class="users">
+<%= render @users %>
+</ul>
+<% end %>
+
+
+
+

@@ -18,6 +18,10 @@ EngineeringProject::Application.routes.draw do
   match '/find_new_friends',         to: 'users#find_new_friends',         via: 'get'
   match '/find_new_friends',         to: 'users#show',         via: 'post'
   match '/delete_posts',         to: 'posts#destroy_posts',         via: 'post'
+  match '/attend',         to: 'users#attend',         via: 'post'
+  match '/unattend',         to: 'users#unattend',         via: 'post'
+  match '/follow',         to: 'users#follow',         via: 'post'
+  match '/unfollow',         to: 'users#unfollow',         via: 'post'
   get 'users/autocomplete_user_name'
   resources :posts, only: [:create, :destroy]
   

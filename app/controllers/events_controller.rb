@@ -4,17 +4,22 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+     @in_index = true
+     @events = Event.paginate(page: params[:page])
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @host = User.find(@event.user_id)
+    @users = @event.likers(User)
+    @game = Game.find(@event.game_id)
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    @games = Game.all
   end
 
   # GET /events/1/edit
@@ -24,17 +29,19 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+  
     @event = Event.new(event_params)
 
-    respond_to do |format|
+
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
+      flash[:success] = "Event Successfully Created" 
+      redirect_to @event 
+      
       else
-        format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        @games = Game.all
+        render 'new'
       end
-    end
+  
   end
 
   # PATCH/PUT /events/1
@@ -56,7 +63,8 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url }
+      flash[:success] = "Event Deleted"
+      format.html { redirect_to games_path }
       format.json { head :no_content }
     end
   end
@@ -69,6 +77,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :event_date, :game_id, :location, :info)
+      params.require(:event).permit(:name, :event_date, :game_id, :location, :info, :user_id)
     end
 end

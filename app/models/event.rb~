@@ -1,2 +1,6 @@
 class Event < ActiveRecord::Base
+belongs_to :user
+belongs_to :game
+acts_as_likeable
+default_scope -> { order('event_date ASC') }
 end
