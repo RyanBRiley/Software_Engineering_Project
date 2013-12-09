@@ -5,6 +5,7 @@
   <%= @game.game_name %>
 </h1>
 </p>
+<center><%= big_icon_for @game%></center><br>
 <% if current_user.follows?(@game) %>
 You are receiving updates for this game
 <%= button_to "Stop Updates", :controller => "users", :action => "unfollow", :id => @game.id %>
