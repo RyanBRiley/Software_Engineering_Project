@@ -19,7 +19,7 @@ end
 
 Given /^another user$/ do
   @user = User.create!({
-			 :name => "Test2",
+			 :name => "cuketest",
              :email => "testcuke2@test.com",
              :password => "testcuke2pass",
              :password_confirmation => "testcuke2pass"
