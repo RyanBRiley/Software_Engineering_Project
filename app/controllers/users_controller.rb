@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @post_owner_id = @user.id
     @events = Event.all.delete_if {|e| !current_user.likes?(e)}
     @followed_games = Game.all.delete_if {|g| !current_user.follows?(g)}
-    @followed_game_updates = Event.where("game_id = ?", @followed_games)
+    @followed_game_updates = Event.where(game_id: @followed_games)
     end
   end
 
